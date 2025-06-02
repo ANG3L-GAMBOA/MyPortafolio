@@ -1,0 +1,58 @@
+---
+import ExperienceItem from "./ExperienceItem.astro"
+const EXPERIENCE = [
+
+  {
+    date: "marzo 2023",
+    title: "Cloud Computing",
+    company: "Google Activate",
+    description:
+      "",
+  },
+    {
+    date: "marzo 2022",
+    title: "Database Design ",
+    company: "Oracle Academy ",
+    description:
+      "",
+  },
+    {
+    date: "marzo 2022",
+    title: "Java Foundations ",
+    company: "Oracle Academy",
+    description:
+      "",
+  },
+    {
+    date: "marzo 2022",
+    title: "Database Programming with SQL",
+    company: "Oracle Academy",
+    description:
+      "",
+  },
+    {
+    date: "marzo 2021",
+    title: "CPA: Programming Essentials C++  ",
+    company: "Cisco Networking Academy ",
+    description:
+      "",
+  },
+    {
+    date: "marzo 2021",
+    title: "CLA: Programming Essentials C  ",
+    company: "Cisco Networking Academy ",
+    description:
+      "",
+  },
+]
+---
+
+<ol class="relative mt-16">
+  {
+    EXPERIENCE.map((experience) => (
+      <li class="">
+        <ExperienceItem {...experience} />
+      </li>
+    ))
+  }
+</ol>

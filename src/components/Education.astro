@@ -1,0 +1,23 @@
+---
+import ExperienceItem from "./ExperienceItem.astro"
+const EXPERIENCE = [
+
+  {
+    date: "abril 2021 - noviembre 2023",
+    title: "Servicio Nacional de Adiestramiento en Trabajo Industrial - SENATI",
+    company: "Desarrollo de Software",
+    description:
+      "",
+  },
+]
+---
+
+<ol class="relative mt-16">
+  {
+    EXPERIENCE.map((experience) => (
+      <li class="">
+        <ExperienceItem {...experience} />
+      </li>
+    ))
+  }
+</ol>

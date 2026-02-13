@@ -78,45 +78,44 @@ const navItems = [
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const sections = document.querySelectorAll("section")
-    const navItems = document.querySelectorAll("header nav a")
+    const sections = [...document.querySelectorAll("section[id]")]
+    const navItems = [...document.querySelectorAll("header nav a[href^='#']")]
 
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-blue-500")
-            } else {
-              item.classList.remove("text-blue-500")
-            }
-          })
-        }
-      })
-    }
+function setActiveSection() {
+  let currentSectionId: string = ""
+  let minDistance = Infinity
 
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
-    })
+  const scrollBottom =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 10
 
-    sections.forEach((section) => {
-      observer.observe(section)
-    })
+  sections.forEach((section: HTMLElement) => {
+    const rect = section.getBoundingClientRect()
+    const distance = Math.abs(rect.top)
 
-    // Cleanup function
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect()
-      } else {
-        sections.forEach((section) => {
-          observer.observe(section)
-        })
-      }
+    if (rect.top <= 120 && distance < minDistance) {
+      minDistance = distance
+      currentSectionId = section.id
     }
   })
+
+  if (scrollBottom && sections.length > 0) {
+    currentSectionId = sections[sections.length - 1].id
+  }
+
+  navItems.forEach((item: HTMLAnchorElement) => {
+    const href = item.getAttribute("href")
+    const hash = href ? href.replace("#", "") : ""
+
+    item.classList.toggle("text-blue-500", hash === currentSectionId)
+  })
+}
+
+
+    window.addEventListener("scroll", setActiveSection, { passive: true })
+    setActiveSection()
+  })
 </script>
+
 
 <style>
   nav {

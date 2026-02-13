@@ -11,7 +11,7 @@ export const ui = {
     "nav.educacion": "Educación",
     "nav.proyectos": "Proyectos",
     "nav.habilidades": "Habilidades",
-    "nav.certificados": "Certficados",
+    "nav.certificados": "Certificados",
     "nav.sobre-mi": "Sobre mí",
     "nav.contacto": "Contacto",
   },
